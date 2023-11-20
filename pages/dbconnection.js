@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
-const conn=mongoose.connect('mongodb://localhost:27017/farmsaathi').then(()=>{
+// const conn=mongoose.connect('mongodb://localhost:27017/farmsaathi').then(()=>{
+const conn=mongoose.connect('mongodb+srv://mrashoksamal:u7omGTQick1XdGkB@clusterpro.i3a7nwf.mongodb.net/FarmSaathi?retryWrites=true&w=majority').then(()=>{
     console.log('Connected to MongoDB')
 }).catch(err => console.log('Error connecting',err));
 module.exports = conn
