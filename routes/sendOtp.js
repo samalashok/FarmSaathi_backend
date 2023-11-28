@@ -11,8 +11,8 @@ router.post('/forgotPass', (req, res) => {
     var transporter = nodemailer.createTransport({
         service: 'gmail',
         auth: {
-            user: process.env.USER,
-            pass: process.env.PASS
+            user: "wefarmsaathi.gmail.com",
+            pass: 'nfpk wqqo xdqt iigp'
         }
     });
 
@@ -24,7 +24,7 @@ router.post('/forgotPass', (req, res) => {
     })
 
     var mailOptions = {
-        from: process.env.USER,
+        from: "wefarmsaathi@gmail.com",
         to: req.body.email,
         subject: 'reset password',
         text: `Your otp is ${otp}`
