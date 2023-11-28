@@ -12,6 +12,7 @@ app.use('/api', require('./routes/addCartToDB'), require('./routes/loginUser'), 
 app.use('/api', require('./routes/getProducts'), require('./routes/deleteCartData'),require('./routes/getCartData'), require('./routes/getImages'),require('./routes/getAddressData'))
 app.use('/checkout', require('./routes/createOrder'),require('./routes/storeOrder'),require('./routes/storePayment'))
 app.use('/account', require('./routes/getOrders'),require('./routes/getPayments'))
+app.use('/auth', require('./routes/sendOtp'))
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
 })
