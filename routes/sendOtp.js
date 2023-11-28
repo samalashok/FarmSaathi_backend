@@ -32,9 +32,9 @@ router.post('/forgotPass', (req, res) => {
 
     transporter.sendMail(mailOptions, function (error, info) {
         if (error) {
-            res.json({ success: false, msg: "Error sending email" })
+            res.json({ success: false, msg: "Error sending email" ,error})
         } else {
-            res.json({ success: true, msg: "otp sent" })
+            res.json({ success: true, msg: "otp sent",info })
         }
     });
 })
