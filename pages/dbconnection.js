@@ -1,10 +1,12 @@
 const mongoose = require('mongoose');
-// const conn=mongoose.connect('mongodb://localhost:27017/farmsaathi').then(()=>{
-const conn=mongoose.connect('mongodb+srv://mrashoksamal:u7omGTQick1XdGkB@clusterpro.i3a7nwf.mongodb.net/FarmSaathi?retryWrites=true&w=majority').then(()=>{
+const dotenv=require('dotenv')
+dotenv.config()
+const conn=mongoose.connect(process.env.MONGODB_URL).then(()=>{
     console.log('Connected to MongoDB')
 }).catch(err => console.log('Error connecting',err));
 module.exports = conn
 
+// const conn=mongoose.connect('mongodb://localhost:27017/farmsaathi').then(()=>{
 // api=a3ZpEjKdtVnyT5aGjGqEnf87KdzJ3IPZ8TBoFfZmIBxH7Mt8Kv18APajhbmdzLhN
 
 // const { MongoClient, ServerApiVersion } = require('mongodb');
