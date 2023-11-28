@@ -27,3 +27,5 @@ router.post('/forgotPass', (req, res) => {
         }
     });
 })
+
+module.exports=router
