@@ -11,8 +11,8 @@ router.post('/forgotPass', (req, res) => {
     var transporter = nodemailer.createTransport({
         service: 'gmail',
         auth: {
-            user: "wefarmsaathi.gmail.com",
-            pass: 'nfpk wqqo xdqt iigp'
+            user: "wefarmsaathi@gmail.com",
+            pass: 'qjss xjxx kmkw zlob'
         }
     });
 
