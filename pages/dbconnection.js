@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const dotenv=require('dotenv')
 dotenv.config()
-const conn=mongoose.connect(process.env.MONGODB_URL).then(()=>{
+const conn=mongoose.connect('mongodb+srv://mrashoksamal:u7omGTQick1XdGkB@clusterpro.i3a7nwf.mongodb.net/FarmSaathi?retryWrites=true&w=majority').then(()=>{
     console.log('Connected to MongoDB')
 }).catch(err => console.log('Error connecting',err));
 module.exports = conn
