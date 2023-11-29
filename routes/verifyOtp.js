@@ -7,15 +7,15 @@ const userSchema = require('../models/userData')
 const bcrypt = require('bcryptjs');
 const saltRounds = 10
 
-router.post('/verifyOtp', (req, res) => {
-    var user = otpSchema.find({ email: req.body.email })
+router.post('/verifyOtp', async (req, res) => {
+    var user = await otpSchema.find({ email: req.body.email })
     if (user.otp === req.body.otp) {
 
         const salt = bcrypt.genSalt(saltRounds);
         const secPass = bcrypt.hash(req.body.password, salt);
-        var uu = userSchema.updateOne({ email: req.body.email }, { $set: { password: secPass } })
+        var uu = await userSchema.updateOne({ email: req.body.email }, { $set: { password: secPass } })
         if (uu) {
-            otpSchema.deleteMany({ email: req.body.email })
+            await otpSchema.deleteMany({ email: req.body.email })
             res.json({ success: true, msg: 'password changed' })
         }
         else

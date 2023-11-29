@@ -17,14 +17,14 @@ router.post('/forgotPass', async (req, res) => {
         var transporter = nodemailer.createTransport({
             service: 'gmail',
             auth: {
-                user: "wefarmsaathi@gmail.com",
-                pass: 'qjss xjxx kmkw zlob'
+                user: process.env.USER,
+                pass: process.env.PASS
             }
         });
 
         var otp = otpGenerator.generate(6, { lowerCaseAlphabets: false, upperCaseAlphabets: false, specialChars: false });
-        otpSchema.deleteMany({ email: req.body.email })
-        otpSchema.create({
+        await otpSchema.deleteMany({ email: req.body.email })
+        await otpSchema.create({
             email: req.body.email,
             otp: otp,
         })
