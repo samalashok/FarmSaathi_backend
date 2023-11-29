@@ -13,6 +13,10 @@ app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Headers", "Content-Type");
   next();
 })
+app.get('/', (req, res) => {
+  res.send("backend is running")
+})
+
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 app.use('/api', require('./routes/addCartToDB'), require('./routes/loginUser'), require('./routes/createUser'), require('./routes/contactUs'), require('./routes/setAddressData'))
