@@ -1,20 +1,23 @@
-const dotenv = require('dotenv')
-dotenv.config()
 const express = require('express');
 const router = express.Router();
-const otpSchema = require('../models/otpData')
-const userSchema = require('../models/userData')
+const otpModel = require('../models/otpData')
+const userModel = require('../models/userData')
 const bcrypt = require('bcryptjs');
 const saltRounds = 10
 
 router.post('/verifyOtp', async (req, res) => {
-    var user = await otpSchema.findOne({ email: req.body.email })
+    var user = await otpModel.findOne({ email: req.body.email })
+    console.log(user.otp)
+    console.log(req.body.otp)
+    console.log(req.body.email)
+    console.log(req.body.password)
     if (user.otp === req.body.otp) {
-        const salt = bcrypt.genSalt(saltRounds);
-        const secPass = bcrypt.hash(req.body.password, salt);
-        var uu = await userSchema.updateOne({ email: req.body.email }, { $set: { password: secPass } })
+        const salt = await bcrypt.genSalt(saltRounds);
+        const secPass = await bcrypt.hash(req.body.password, salt);
+        console.log(secPass)
+        const uu = await userModel.updateOne({ email: req.body.email }, { $set: { password: secPass } })
         if (uu) {
-            await otpSchema.deleteMany({ email: req.body.email })
+            otpModel.deleteMany({ email: req.body.email })
             res.json({ success: true, msg: 'password changed' })
         }
         else

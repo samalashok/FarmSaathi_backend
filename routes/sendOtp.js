@@ -4,7 +4,7 @@ const express = require('express');
 const router = express.Router();
 var nodemailer = require('nodemailer');
 var otpGenerator = require('otp-generator');
-const otpSchema = require('../models/otpData')
+const otpModel = require('../models/otpData')
 const userModel=require('../models/userData')
 
 
@@ -23,8 +23,8 @@ router.post('/forgotPass', async (req, res) => {
         });
 
         var otp = otpGenerator.generate(6, { lowerCaseAlphabets: false, upperCaseAlphabets: false, specialChars: false });
-        await otpSchema.deleteMany({ email: req.body.email })
-        await otpSchema.create({
+        await otpModel.deleteMany({ email: req.body.email })
+        await otpModel.create({
             email: req.body.email,
             otp: otp,
         })
