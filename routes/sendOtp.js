@@ -8,8 +8,8 @@ const otpSchema = require('../models/otpData')
 const userModel=require('../models/userData')
 
 
-router.post('/forgotPass', (req, res) => {
-    const user = userModel.findOne({ email: req.body.email });
+router.post('/forgotPass', async (req, res) => {
+    const user = await userModel.findOne({ email: req.body.email });
     if (!user) {
         res.json({ user: "notfound", msg: 'Email not resistered, please sign up' });
     }
