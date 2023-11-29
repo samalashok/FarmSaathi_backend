@@ -4,20 +4,25 @@ const express = require('express');
 const router = express.Router();
 const otpSchema = require('../models/otpData')
 const userSchema = require('../models/userData')
-
+const bcrypt = require('bcryptjs');
+const saltRounds = 10
 
 router.post('/verifyOtp', (req, res) => {
     var user = otpSchema.find({ email: req.body.email })
     if (user.otp === req.body.otp) {
-        otpSchema.deleteMany({ email: req.body.email })
-        var uu = userSchema.updateOne({ email: req.body.email }, { $set: { password: req.body.password } })
-        if (uu)
-            res.json({ success: true })
+
+        const salt = bcrypt.genSalt(saltRounds);
+        const secPass = bcrypt.hash(req.body.password, salt);
+        var uu = userSchema.updateOne({ email: req.body.email }, { $set: { password: secPass } })
+        if (uu) {
+            otpSchema.deleteMany({ email: req.body.email })
+            res.json({ success: true, msg: 'password changed' })
+        }
         else
-            res.json({ success: false })
+            res.json({ success: false, msg: "something went wrong" })
     }
     else {
-        res.json({ success: false })
+        res.json({ success: false, msg: "otp did not match" })
     }
 })
 

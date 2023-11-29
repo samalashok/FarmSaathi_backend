@@ -9,7 +9,7 @@ router.post('/loginUser', async (req, res) => {
     let email = req.body.email;
     const user = await userModel.findOne({ email: email });
     if (!user) {
-        return res.status(200).json({ user: "found", msg: 'Email not resistered, please sign up' });
+        return res.status(200).json({ user: "notfound", msg: 'Email not resistered, please sign up' });
     }
     else {
         const comp = await bcrypt.compare(req.body.password, user.password)
