@@ -8,9 +8,8 @@ const bcrypt = require('bcryptjs');
 const saltRounds = 10
 
 router.post('/verifyOtp', async (req, res) => {
-    var user = await otpSchema.find({ email: req.body.email })
+    var user = await otpSchema.findOne({ email: req.body.email })
     if (user.otp === req.body.otp) {
-
         const salt = bcrypt.genSalt(saltRounds);
         const secPass = bcrypt.hash(req.body.password, salt);
         var uu = await userSchema.updateOne({ email: req.body.email }, { $set: { password: secPass } })
