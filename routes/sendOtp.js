@@ -30,7 +30,7 @@ router.post('/forgotPass', async (req, res) => {
         })
 
         var mailOptions = {
-            from: "wefarmsaathi@gmail.com",
+            from: process.env.USER,
             to: req.body.email,
             subject: 'reset password',
             text: `Your otp is ${otp}`
