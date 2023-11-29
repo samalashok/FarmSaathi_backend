@@ -11,7 +11,7 @@ const userModel=require('../models/userData')
 router.post('/forgotPass', (req, res) => {
     const user = userModel.findOne({ email: req.body.email });
     if (!user) {
-        return res.json({ user: "notfound", msg: 'Email not resistered, please sign up' });
+        res.json({ user: "notfound", msg: 'Email not resistered, please sign up' });
     }
     else {
         var transporter = nodemailer.createTransport({
