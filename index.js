@@ -24,6 +24,6 @@ app.use('/api', require('./routes/getProducts'), require('./routes/deleteCartDat
 app.use('/checkout', require('./routes/createOrder'), require('./routes/storeOrder'), require('./routes/storePayment'))
 app.use('/account', require('./routes/getOrders'), require('./routes/getPayments'))
 app.use('/auth', require('./routes/sendOtp'), require('./routes/verifyOtp'))
-app.listen(5000, () => {
+app.listen(process.env.PORT, () => {
   console.log(`Example app listening on port ${process.env.PORT || 4000}`)
 })
